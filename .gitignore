@@ -1,0 +1,16 @@
+# Environment
+.env
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+
+# Datasets
+Dataset/
+*.csv
+*.xlsx
+
+# Model files (Optional: if they are big! model.pkl and encoders.pkl are usually small enough to push)
+# model.pkl
+# encoders.pkl
