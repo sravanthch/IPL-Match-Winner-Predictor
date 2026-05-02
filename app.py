@@ -134,13 +134,38 @@ st.markdown("<p class='subheader'>Next-Gen Winning Probability Predictor</p>", u
 with st.container():
     st.markdown('<div class="main-card">', unsafe_allow_html=True)
     
-    # Helper function to get sorted classes
-    def get_classes(encoder):
-        return sorted(list(encoder.classes_))
+    # 2026 Current Teams
+    team_list = [
+        'Chennai Super Kings',
+        'Delhi Capitals',
+        'Gujarat Titans',
+        'Kolkata Knight Riders',
+        'Lucknow Super Giants',
+        'Mumbai Indians',
+        'Punjab Kings',
+        'Rajasthan Royals',
+        'Royal Challengers Bengaluru',
+        'Sunrisers Hyderabad'
+    ]
 
-    team_list = get_classes(encoders['team1'])
-    venue_list = get_classes(encoders['venue'])
-    toss_decision_list = get_classes(encoders['toss_decision'])
+    # Mapping of 2026 Venue Names (UI) -> Model Venue Names (Internal)
+    venue_mapping = {
+        'BRSABV Ekana Cricket Stadium, Lucknow': 'Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow',
+        'Wankhede Stadium, Mumbai': 'Wankhede Stadium, Mumbai',
+        'Rajiv Gandhi International Stadium, Hyderabad': 'Rajiv Gandhi International Stadium, Hyderabad',
+        'MA Chidambaram Stadium, Chennai': 'MA Chidambaram Stadium, Chennai',
+        'M Chinnaswamy Stadium, Bengaluru': 'M. Chinnaswamy Stadium, Bengaluru',
+        'Narendra Modi Stadium, Ahmedabad': 'Narendra Modi Stadium, Ahmedabad',
+        'Eden Gardens, Kolkata': 'Eden Gardens, Kolkata',
+        'New PCA Stadium, New Chandigarh': 'Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh',
+        'Arun Jaitley Stadium, Delhi': 'Arun Jaitley Stadium, Delhi',
+        'Sawai Mansingh Stadium, Jaipur': 'Sawai Mansingh Stadium, Jaipur',
+        'Shaheed Veer Narayan Singh Stadium, Raipur': 'Shaheed Veer Narayan Singh International Stadium',
+        'Himachal Pradesh Cricket Association Stadium, Dharamshala': 'Himachal Pradesh Cricket Association Stadium, Dharamsala',
+    }
+    venue_list = list(venue_mapping.keys())
+    
+    toss_decision_list = sorted(list(encoders['toss_decision'].classes_))
 
     # UI Layout
     col1, col2 = st.columns(2)
@@ -183,6 +208,8 @@ if predict_btn:
             
             for f in features:
                 val = input_data[f]
+                if f == 'venue':
+                    val = venue_mapping.get(val, val)
                 encoded_val = encoders[f].transform([val])[0]
                 encoded_input.append(encoded_val)
                 
