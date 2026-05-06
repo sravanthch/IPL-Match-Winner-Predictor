@@ -2,7 +2,7 @@
 
 A Machine Learning web application built with Python and Streamlit to predict the winning team of Indian Premier League (IPL) matches. 
 
-The model is trained on historical ball-by-ball IPL match data, taking into account `Team 1`, `Team 2`, `Venue`, `Toss Winner`, and `Toss Decision` to establish head-to-head performance and make predictions for upcoming matches!
+The ML model is trained on historical ball-by-ball IPL match data, taking into account `Team 1`, `Team 2`, `Venue`, `Toss Winner`, and `Toss Decision` to establish head-to-head performance and make predictions for upcoming matches!
 
 ## 🚀 Live Demo Deployment
 This app is designed to be easily deployed to Streamlit Community Cloud. 
